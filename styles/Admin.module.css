@@ -1,0 +1,46 @@
+.container {
+  padding: 50px;
+  display: flex;
+}
+
+.item {
+  flex: 1;
+}
+
+.table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 20px;
+}
+
+.button {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.button:first-child {
+  background-color: teal;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 5px;
+}
+
+.button:last-child {
+  background-color: red;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.statusButton {
+  color: white;
+  background-color: #d1411e;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+}

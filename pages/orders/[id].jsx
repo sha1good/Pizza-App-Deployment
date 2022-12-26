@@ -1,8 +1,9 @@
 import styles from "../../styles/Orders.module.css";
 import Image from "next/legacy/image";
+import axios from "axios";
 
-const Orders = () => {
-  const status = 0;
+const Orders = ({ order }) => {
+  const status = order.status;
 
   const statusClass = (index) => {
     if (index - status < 1) return styles.done;
@@ -25,18 +26,18 @@ const Orders = () => {
             <tbody>
               <tr className={styles.tr}>
                 <td>
-                  <span className={styles.id}>123646468</span>
+                  <span className={styles.id}>{order._id}</span>
                 </td>
                 <td>
-                  <span className={styles.name}>Sheriff Adebisi</span>
+                  <span className={styles.name}>{order.customer}</span>
                 </td>
                 <td>
                   <span className={styles.address}>
-                    69,Lambo Lasunwon Road, Ikorodu
+                    { order.address}
                   </span>
                 </td>
                 <td>
-                  <span className={styles.total}>$39.80</span>
+                  <span className={styles.total}>${order.total}</span>
                 </td>
               </tr>
             </tbody>
@@ -47,28 +48,28 @@ const Orders = () => {
             <Image src="/img/paid.png" alt="" width={30} height="30" />
             <span>Payment</span>
             <div className={styles.checkedIcon}>
-              <Image  src="/img/checked.png" alt="" width={30} height={30} />
+              <Image src="/img/checked.png" alt="" width={30} height={30} />
             </div>
           </div>
           <div className={statusClass(1)}>
             <Image src="/img/bake.png" alt="" width={30} height="30" />
             <span>Preparing</span>
             <div className={styles.checkedIcon}>
-              <Image  src="/img/checked.png" alt="" width={30} height={30} />
+              <Image src="/img/checked.png" alt="" width={30} height={30} />
             </div>
           </div>
           <div className={statusClass(2)}>
             <Image src="/img/bike.png" alt="" width={30} height="30" />
             <span>On the way</span>
             <div className={styles.checkedIcon}>
-              <Image  src="/img/checked.png" alt="" width={30} height={30} />
+              <Image src="/img/checked.png" alt="" width={30} height={30} />
             </div>
           </div>
           <div className={statusClass(3)}>
             <Image src="/img/delivered.png" alt="" width={30} height="30" />
             <span>Delivered</span>
             <div className={styles.checkedIcon}>
-              <Image  src="/img/checked.png" alt="" width={30} height={30} />
+              <Image src="/img/checked.png" alt="" width={30} height={30} />
             </div>
           </div>
         </div>
@@ -77,13 +78,13 @@ const Orders = () => {
         <div className={styles.wrapper}>
           <h1 className={styles.title}> CART TOTAL</h1>
           <div className={styles.totalText}>
-            <b className={styles.totalTitleText}>Subtotal:</b> $39.80
+            <b className={styles.totalTitleText}>Subtotal:</b> ${order.total}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTitleText}>Discount:</b> $0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTitleText}>Total:</b> $39.80
+            <b className={styles.totalTitleText}>Total:</b> ${order.total}
           </div>
           <button disabled className={styles.button}>
             PAID!
@@ -92,6 +93,17 @@ const Orders = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const response = await axios.get(
+    `http://localhost:3000/api/orders/${params.id}`
+  );
+  return {
+    props: {
+      order: response.data,
+    },
+  };
 };
 
 export default Orders;
