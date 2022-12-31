@@ -7,7 +7,7 @@ export default async function handler(request, response) {
     query: { id },
   } = request;
 
-  dbConnect();
+ await dbConnect();
 
   if (method === "GET") {
     try {

@@ -7,7 +7,7 @@ export default async function handler(request, response) {
 
   const token = cookies.token;
 
-  dbConnect();
+  await dbConnect();
 
   if (method === "GET") {
     try {
