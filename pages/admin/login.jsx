@@ -12,7 +12,7 @@ const Login = () => {
   const handleClick = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3000/api/login", {
+      await axios.post("https://pizza-resturant-app.netlify.app/api/login", {
         username,
         password,
       });
