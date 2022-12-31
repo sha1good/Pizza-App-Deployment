@@ -26,7 +26,7 @@ const Cart = () => {
   const createOrder = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/orders",
+        "https://pizza-resturant-app.netlify.app/api/orders",
         data
       );
       if (response.status === 201) {
